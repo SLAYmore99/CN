@@ -3,7 +3,7 @@
 #include <climits>
 #include <iomanip>
 
-#ifdef __LINUX__
+#ifdef __linux__
 #define CLRSCR "clear"
 #else
 #define CLRSCR "cls"
@@ -105,6 +105,9 @@ class node
         cout << endl;
         cout << setw(1) << "|" << setw(8) << setfill(' ') << right << "node" << setw(1) << "|" << setw(8) << setfill(' ') << right
              << "delay" << setw(1) << "|" << setw(8) << setfill(' ') << right << "via" << setw(1) << "|" << endl;
+        for (int i = 0; i < 28; i++)
+            cout << "-";
+        cout << endl;
         for (int i = 0; i < totalNodes; i++)
         {
             cout << setw(1) << "|" << setw(8) << setfill(' ') << right << char(i + 'A') << setw(1) << "|" << setw(8) << setfill(' ')
@@ -153,6 +156,7 @@ int main(int argc, char const *argv[])
     primaryNode.calculateRoutingTable();
     system(CLRSCR);
     primaryNode.displayRoutingTable();
+    cout<<"Press enter to continue...";
     cin.ignore();
     cin.get();
     for (int i = 0; i < numOfNeighbours; i++)
