@@ -3,6 +3,12 @@
 #include <climits>
 #include <iomanip>
 
+#ifdef __LINUX__
+#define CLRSCR "clear"
+#else
+#define CLRSCR "cls"
+#endif
+
 using namespace std;
 
 class node
@@ -135,7 +141,7 @@ int main(int argc, char const *argv[])
     neighbours = new node *[numOfNeighbours];
     for (int i = 0; i < numOfNeighbours; i++)
     {
-        system("clear");
+        system(CLRSCR);
         cout << "Id of neighbour " << i + 1 << " : ";
         cin >> nodeId;
         cout << "Distance from " << char('A' + primaryNode.getNodeId()) << " : ";
@@ -145,7 +151,7 @@ int main(int argc, char const *argv[])
         primaryNode.addNeighbour(neighbours[i], distance);
     }
     primaryNode.calculateRoutingTable();
-    system("clear");
+    system(CLRSCR);
     primaryNode.displayRoutingTable();
     cin.ignore();
     cin.get();
