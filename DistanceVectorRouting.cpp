@@ -156,7 +156,7 @@ int main(int argc, char const *argv[])
     primaryNode.calculateRoutingTable();
     system(CLRSCR);
     primaryNode.displayRoutingTable();
-    cout<<"Press enter to continue...";
+    cout << "Press enter to continue...";
     cin.ignore();
     cin.get();
     for (int i = 0; i < numOfNeighbours; i++)
