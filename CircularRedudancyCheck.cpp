@@ -50,7 +50,7 @@ char *crc(char *dataFrame, char *genFunc)
 
 char *getReminder(char *dataFrame, char *genFunc)
 {
-    char *tempDataFrame = new char[strlen(dataFrame) + strlen(genFunc) + 1];
+    char *tempDataFrame = new char[strlen(dataFrame) + strlen(genFunc)];
     strcpy(tempDataFrame, dataFrame);
     for (int i = 0; i < strlen(genFunc) - 1; i++)
     {
@@ -92,7 +92,7 @@ bool isFrameCorrect(char *dataFrame, char *genFunc)
     return false;
 }
 
-void simulateNetwork(bool isNoisy)
+void simulateNetwork(bool isNoisy=false)
 {
     srand(time(0));
     int frameSize, genFuncSize;
