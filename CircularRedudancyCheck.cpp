@@ -5,11 +5,11 @@
 
 using namespace std;
 
-char *crc(char *, char *);
-char *getReminder(char *, char *);
-char *substr(char *, int, int);
-bool isFrameCorrect(char *, char *);
-void simulateNetwork(bool isNoisy = false);
+char *crc(char *, char *); //function for crc check
+char *getReminder(char *, char *); //helper function to get reminder by dividing data with poulynomial
+char *substr(char *, int, int); //function to get substring of a data frame
+bool isFrameCorrect(char *, char *); //fucntion to check whether the recieved data is correct or not	
+void simulateNetwork(bool isNoisy = false); //function to simulate network
 
 int main(int argc, char *argv[])
 {
