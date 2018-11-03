@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
 char *crc(char *dataFrame, char *genFunc)
 {
-    char *result = new char[strlen(dataFrame) + strlen(genFunc) + 1];
+    char *result = new char[strlen(dataFrame) + strlen(genFunc)];
     strcpy(result, dataFrame);
     strcat(result, getReminder(dataFrame, genFunc));
     return result;
