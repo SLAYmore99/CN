@@ -92,7 +92,7 @@ bool isFrameCorrect(char *dataFrame, char *genFunc)
     return false;
 }
 
-void simulateNetwork(bool isNoisy=false)
+void simulateNetwork(bool isNoisy)
 {
     srand(time(0));
     int frameSize, genFuncSize;
