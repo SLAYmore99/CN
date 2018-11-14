@@ -19,17 +19,19 @@ class frame
 class Simulator
 {
     queue<frame> channel;
+    queue<int> ACKS;
     frame *frames;
     int totalFrames;
     int windowSize;
-
+    int faultIndex;
+    int faultHappens;
   public:
     Simulator();
     ~Simulator();
-    void sender(int from);
+    void sender(int from,bool isNoisy);
     void reciever();
     void recieveACK();
-    void simulate();
+    void simulate(bool isNoisy=false);
 };
 
 int main()
@@ -60,34 +62,59 @@ Simulator::~Simulator()
         delete[] frames;
 }
 
-void Simulator::sender(int from)
+void Simulator::sender(int from,bool isNoisy)
 {
-    int faultIndex = (rand() % windowSize) + from;
-    int faultHappens = rand() % 2;
+    if(isNoisy)
+    {
+    faultIndex = (rand() % totalFrames);
+    faultHappens = rand() % 2;
+    }
+    else
+    {
+        faultHappens = 1;
+    }
     for (int i = from; i < from + windowSize && i < totalFrames; i++)
     {
         if (i == faultIndex && faultHappens == 0)
             continue;
+        cout<<"SENDER: sent frame "<<frames[i].data<<" SEQ: "<<frames[i].seq<<endl;
         channel.push(frames[i]);
+        ACKS.push(frames[i].seq);
     }
-    if (faultHappens == 0)
-        sender(faultIndex);
 }
 
 void Simulator::reciever()
 {
     while(!channel.empty())
     {
-        cout<<"Recieved frame: "<<channel.front().data<<"; SEQ: "<<channel.front().seq<<endl;
+        cout<<"RECIEVER: Recieved frame: "<<channel.front().data<<" SEQ: "<<channel.front().seq<<endl;
         channel.pop();
     }
 }
 
-void Simulator::simulate()
+void Simulator::recieveACK()
+{
+    while(!ACKS.empty())
+    {
+        cout<<"SENDER: Recieved ACK for frame SEQ: "<<ACKS.front()<<endl;
+        ACKS.pop();
+    }
+    if (faultHappens == 0)
+    {
+        cout<<"SENDER: Haven't Recieved ack for frame: "<<frames[faultIndex].seq<<endl;
+        cout<<"SENDER: Resending frames... from SEQ: "<<frames[faultIndex].seq<<endl;
+        sender(faultIndex);
+        reciever();
+        recieveACK();
+    }
+}
+
+void Simulator::simulate(bool isNoisy)
 {
     for(int i=0;i<totalFrames;i+=windowSize)
     {
         sender(i);
         reciever();
+        recieveACK();
     }
 }
