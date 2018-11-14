@@ -32,7 +32,7 @@ Router::Router()
     cout << "Enter number of nodes: ";
     cin >> numOfNodes;
     graph = new int *[numOfNodes];
-    cout << "Enter weighted graph G" << endl;
+    cout << "Enter weighted graph" << endl;
     for (int i = 0; i < numOfNodes; i++)
     {
         graph[i] = new int[numOfNodes];
@@ -84,7 +84,10 @@ void Router::dijkstra(int src)
 void Router::getRoute(int src,int dst)
 {
     dijkstra(src);
-    cout<<"dist from src to dst is: "<<dist[dst]<<endl;
+    for(int i=0;i<numOfNodes;i++)
+    {
+        cout<<"Dist from "<<src<<" to "<<i<<" is "<<dist[i]<<endl;
+    }
 }
 
 int Router::emptySet()
