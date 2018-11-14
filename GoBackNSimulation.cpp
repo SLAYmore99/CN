@@ -24,6 +24,7 @@ class Simulator
     int faultIndex;
     int faultHappens;
     bool isNoisy;
+    int i;
   public:
     Simulator();
     ~Simulator();
@@ -41,7 +42,7 @@ int main()
     {
         cout<<"GO BACK-N SIMULATOR"<<endl;
         cout<<"1) Simulate go back n for noisy channel"<<endl;
-        cout<<"2) Simulate go back n fot non-noisy channel"<<endl;
+        cout<<"2) Simulate go back n for non-noisy channel"<<endl;
         cout<<"Enter 0 to exit..."<<endl;
         cout<<"Enter your choice: ";
         cin>>choice;
@@ -58,7 +59,7 @@ int main()
             default:
                 cout<<"Wrong choice please try again..."<<endl;
         }
-        cout<<"Press enter to continue..."<<endl;
+        cout<<"Press enter to continue...";
         cin.ignore();
         cin.get();
     }
@@ -122,6 +123,7 @@ void Simulator::recieveACK()
     while (!ACKS.empty())
     {
         cout << "SENDER: Recieved ACK for frame SEQ: " << ACKS.front() << endl;
+        i++;
         ACKS.pop();
     }
     if (faultHappens == 0)
@@ -137,7 +139,7 @@ void Simulator::recieveACK()
 void Simulator::simulate(bool isNoisy)
 {
     this->isNoisy = isNoisy;
-    for (int i = 0; i < totalFrames; i += windowSize)
+    for (i = 0; i < totalFrames;)
     {
         sender(i);
         reciever();
