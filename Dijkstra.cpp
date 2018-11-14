@@ -27,7 +27,33 @@ class Router
 int main()
 {
     Router router;
-    router.getRoute(1, 4);
+    int choice;
+    while (1)
+    {
+        cout << "DIJKSTRA ROUTE FINDER" << endl;
+        cout << "1) Enter src and destination to get path" << endl;
+        cout << "Enter 0 to exit..." << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 0:
+            exit(1);
+        case 1:
+            int from,to;
+            cout<<"Enter source: ";
+            cin>>from;
+            cout<<"Enter destination: ";
+            cin>>to;
+            router.getRoute(from,to);
+            break;
+        default:
+            cout<<"ERROR: wrong choice please try again..."<<endl;
+        }
+        cout<<"Press enter to continue...";
+        cin.ignore();
+        cin.get();
+    }
 }
 
 Router::Router()
@@ -93,7 +119,7 @@ void Router::getRoute(int src, int dst)
     cout << "Dist from " << src << " to " << dst << " is " << dist[dst] << endl;
     cout << "Path: ";
     printPath(dst);
-    cout<<endl;
+    cout << endl;
 }
 
 int Router::emptySet()
@@ -124,10 +150,10 @@ int Router::lowestDistInSet()
 
 void Router::printPath(int dst)
 {
-    if(parent[dst]==-1)
+    if (parent[dst] == -1)
     {
         return;
     }
     printPath(parent[dst]);
-    cout<<parent[dst]<<" ";
+    cout << parent[dst] << " ";
 }
