@@ -51,7 +51,6 @@ Simulator::Simulator()
         cout << "Enter frame number " << i + 1 << " : ";
         cin >> frames[i].data;
         frames[i].seq = i % windowSize;
-        frames[i].seq = (i + 1) % windowSize;
     }
 }
 
@@ -64,10 +63,10 @@ Simulator::~Simulator()
 void Simulator::sender(int from)
 {
     int faultIndex = (rand() % windowSize) + from;
-    int faultHappens = rand() % 5;
+    int faultHappens = rand() % 2;
     for (int i = from; i < from + windowSize && i < totalFrames; i++)
     {
-        if (i == faultIndex)
+        if (i == faultIndex && faultHappens == 0)
             continue;
         channel.push(frames[i]);
     }
@@ -77,9 +76,10 @@ void Simulator::sender(int from)
 
 void Simulator::reciever()
 {
-    while(!channel.empty)
+    while(!channel.empty())
     {
-        cout<<"Recieved frame: "<<channel.front().data<<"; SEQ: "<<channel.front().seq;
+        cout<<"Recieved frame: "<<channel.front().data<<"; SEQ: "<<channel.front().seq<<endl;
+        channel.pop();
     }
 }
 
