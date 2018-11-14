@@ -12,8 +12,6 @@ class frame
   public:
     string data;
     int seq;
-    int ack;
-    bool isResent;
 };
 
 class Simulator
