@@ -38,7 +38,32 @@ class Simulator
 int main()
 {
     Simulator sim;
-    sim.simulate();
+    int choice;
+    while(true)
+    {
+        cout<<"GO BACK-N SIMULATOR"<<endl;
+        cout<<"1) Simulate go back n for noisy channel"<<endl;
+        cout<<"2) Simulate go back n fot non-noisy channel"<<endl;
+        cout<<"Enter 0 to exit..."<<endl;
+        cout<<"Enter your choice: ";
+        cin>>choice;
+        switch(choice)
+        {
+            case 0:
+                exit(1);
+            case 1:
+                sim.simulate(true);
+                break;
+            case 2: 
+                sim.simulate(false);
+                break;
+            default:
+                cout<<"Wrong choice please try again..."<<endl;
+        }
+        cout<<"Press enter to continue..."<<endl;
+        cin.ignore();
+        cin.get();
+    }
 }
 
 Simulator::Simulator()
