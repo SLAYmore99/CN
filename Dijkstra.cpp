@@ -87,7 +87,7 @@ Router::~Router()
 
 void Router::dijkstra(int src)
 {
-    int current, lowest;
+    int current;
     for (int i = 0; i < numOfNodes; i++)
     {
         dist[i] = INF;
